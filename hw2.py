@@ -44,7 +44,7 @@ def mean():
             totalHeight += float(text[heightCount])
             count += 1
         heightCount += 2
-    meanheight = totalHeight / count
+    meanheight = (totalHeight / count) * 2.54
 
     weightCount = 5
     totalWeight = 0
@@ -54,8 +54,8 @@ def mean():
             totalWeight += float(text[weightCount])
             count += 1
         weightCount += 2
-    meanweight = totalWeight / count
-    return f'mean height is {meanheight}, mean weight is {meanweight}'
+    meanweight = (totalWeight / count) / 2.20462
+    return f'mean height is {meanheight} cm, mean weight is {meanweight} kg'
 
 @app.route('/space/')
 def astronauts_No():
