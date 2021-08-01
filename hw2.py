@@ -7,6 +7,10 @@ import csv
 app = Flask(__name__)
 fake = Faker()
 
+@app.route('/')
+def home():
+    return ''
+
 @app.route('/requirements/')
 def req_func ():
     with open('requirements.txt', 'r') as file:
