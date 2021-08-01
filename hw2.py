@@ -1,3 +1,4 @@
+import requests
 from flask import Flask
 from faker import Faker
 import re
@@ -45,7 +46,7 @@ def mean():
             count += 1
         weightCount += 2
     meanweight = totalWeight / count
-    return f'mean height is {meanheight}/n mean weight is {meanweight}'
+    return f'mean height is {meanheight}, mean weight is {meanweight}'
 
 if __name__ == '__main__':
     app.run(debug=True)
