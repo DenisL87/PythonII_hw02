@@ -1,8 +1,8 @@
-import requests
 from flask import Flask
 from faker import Faker
 import re
 import csv
+import requests
 
 app = Flask(__name__)
 fake = Faker()
@@ -14,17 +14,22 @@ def home():
 @app.route('/requirements/')
 def req_func ():
     with open('requirements.txt', 'r') as file:
-        return file.read()
+        text = file.read()
+        print(text)
+    return text
 
-@app.route('/space/')
-def astronauts_No():
-    r = requests.get('http://api.open-notify.org/astros.json')
-    dict = eval(r.text)
-    value = 0
-    for key in dict:
-        if key == 'number':
-            value = dict[key]
-    return str(value)
+@app.route('/generate-users')
+def gen_users ():
+    users = {}
+    count = 0
+    while count < 100:
+        name = fake.name()
+        email = name + '@gmail.com'
+        if ' ' in email:
+            email = email.replace(' ', '')
+        users[count + 1] = ['name: ' + name + ', email: ' + email]
+        count += 1
+    return users
 
 @app.route('/mean/')
 def mean():
@@ -51,6 +56,16 @@ def mean():
         weightCount += 2
     meanweight = totalWeight / count
     return f'mean height is {meanheight}, mean weight is {meanweight}'
+
+@app.route('/space/')
+def astronauts_No():
+    r = requests.get('http://api.open-notify.org/astros.json')
+    dict = eval(r.text)
+    value = 0
+    for key in dict:
+        if key == 'number':
+            value = dict[key]
+    return str(value)
 
 if __name__ == '__main__':
     app.run(debug=True)
