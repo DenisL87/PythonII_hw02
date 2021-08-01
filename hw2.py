@@ -18,7 +18,7 @@ def req_func ():
         print(text)
     return text
 
-@app.route('/generate-users')
+@app.route('/generate-users/')
 def gen_users ():
     users = {}
     count = 0
