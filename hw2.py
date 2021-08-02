@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from faker import Faker
 import re
 import csv
@@ -18,22 +18,23 @@ def req_func ():
         print(text)
     return text
 
-@app.route('/generate-users/<getusers>')
-def gen_users (getusers):
+@app.route('/generate-users')
+def gen_users ():
+    count = request.args.get('count')
     users = {}
     newdict = {}
-    count = 0
-    while count < 100:
+    whilecount = 0
+    while whilecount < 100:
         name = fake.name()
         email = name + '@gmail.com'
         if ' ' in email:
             email = email.replace(' ', '')
-        users[count + 1] = ['name: ' + name + ', email: ' + email]
-        count += 1
-    count = 0
-    while count < int(getusers):
-        newdict[count + 1] = users[count + 1]
-        count += 1
+        users[whilecount + 1] = ['name: ' + name + ', email: ' + email]
+        whilecount += 1
+    whilecount = 0
+    while whilecount < int(count):
+        newdict[whilecount + 1] = users[whilecount + 1]
+        whilecount += 1
     return newdict
 
 @app.route('/mean/')
